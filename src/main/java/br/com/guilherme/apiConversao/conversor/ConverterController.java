@@ -20,13 +20,12 @@ public class ConverterController {
     @PostMapping
     public ResponseEntity<Object> postConversor(@RequestBody(required = false) Object body,
                                                            @RequestHeader(value = "Authorization",required = false) String authorization,
-                                                           @RequestParam Map<String, Object> url){
+                                                           @RequestParam Map<String, String> url){
         String urlValidada = validaUrl(url.toString());
         URI uri = URI.create(urlValidada);
         Optional<Object> optional = Optional.ofNullable(body);
         return apiClient.postConversor(uri,authorization,optional.orElse(""));
     }
-
     @GetMapping
     public ResponseEntity<Object> getConversor( @RequestHeader(value = "Authorization",required = false) String authorization,
                                                 @RequestParam Map<String, Object> url){
@@ -34,7 +33,6 @@ public class ConverterController {
         URI uri = URI.create(urlValidada);
         return apiClient.getConversor(uri,authorization);
     }
-
     @PutMapping
     public ResponseEntity<Object> putConversor(@RequestBody(required = false) Object body,
                                                 @RequestHeader(value = "Authorization",required = false) String authorization,
@@ -61,6 +59,6 @@ public class ConverterController {
     }
 
     private String limpa(String url) {
-        return url.replace("{","").replace("}","").replace("url=","").replace(" ", "");
+        return url.replace("{","").replace("}","").replace("url=","").replace(" ", "").replace(",","&");
     }
 }
