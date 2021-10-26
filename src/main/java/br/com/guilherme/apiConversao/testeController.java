@@ -1,10 +1,7 @@
 package br.com.guilherme.apiConversao;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -18,7 +15,9 @@ public class testeController {
     @PostMapping
     public ResponseEntity<Object> recebeArquivo(@RequestParam String table_name,
                                                 @RequestParam String table_sys_id,
-                                                @RequestParam MultipartFile uploadFile) throws IOException {
+                                                @RequestParam MultipartFile uploadFile,
+                                                @RequestHeader("Authorization") String authorization) throws IOException {
+        System.out.println("Authorization: " + authorization);
         uploadFile.transferTo(Paths.get(uploadFile.getOriginalFilename()));
         return ResponseEntity.ok(table_name + table_sys_id + uploadFile.getOriginalFilename());
     }

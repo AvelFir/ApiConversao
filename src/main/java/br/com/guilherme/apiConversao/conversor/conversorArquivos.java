@@ -33,7 +33,7 @@ public class conversorArquivos {
         URI uri = UriService.geraUriCorretamente(request.getQueryString());
         UploadResource fileUploadResource = Feign.builder().encoder(new SpringFormEncoder())
                 .target(UploadResource.class, uri.toString());
-        Response response = fileUploadResource.uploadFile(table_name,table_sys_id,uploadFile);
+        Response response = fileUploadResource.uploadFile(authorization,table_name,table_sys_id,uploadFile);
         return response.toString();
     }
 
