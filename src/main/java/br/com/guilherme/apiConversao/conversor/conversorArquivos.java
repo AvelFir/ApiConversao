@@ -1,5 +1,7 @@
 package br.com.guilherme.apiConversao.conversor;
 
+
+import br.com.guilherme.apiConversao.external.FileClient;
 import br.com.guilherme.apiConversao.external.UploadResource;
 import br.com.guilherme.apiConversao.services.UriService;
 import feign.Feign;
@@ -7,7 +9,8 @@ import feign.Response;
 import feign.form.spring.SpringFormEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.reactive.function.client.WebClient;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;
 
@@ -16,6 +19,10 @@ import java.net.URI;
 @RequestMapping("/apiconversor/arquivo")
 public class conversorArquivos {
 
+    WebClient webClient = WebClient.create();
+
+    @Autowired
+    FileClient fileClient;
 
     @PostMapping(consumes = "multipart/form-data")
     public String uploadFileWithManualClient(@RequestParam String table_name,
