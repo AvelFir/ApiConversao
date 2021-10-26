@@ -1,0 +1,14 @@
+ pom.xml                                            |  25 [32m++++[m[31m-[m
+ .../apiConversao/ApiConversaoApplication.java      |  14 [32m+++[m
+ .../conversor/ConverterController.java             |  42 [32m++++[m[31m-----[m
+ .../apiConversao/conversor/FormDataDTO.java        |   2 [32m+[m[31m-[m
+ .../apiConversao/conversor/conversorArquivos.java  | 103 [32m++++++++++++++++++++[m[31m-[m
+ .../ExceptionHandlerController.java                |   3 [32m+[m[31m-[m
+ .../guilherme/apiConversao/external/ApiClient.java |  14 [32m++[m[31m-[m
+ .../apiConversao/external/FeignConfig.java         |  54 [32m++++++++++[m[31m-[m
+ .../apiConversao/external/FileClient.java          |  21 [32m++++[m[31m-[m
+ .../apiConversao/external/UploadResource.java      |  19 [32m+++[m[31m-[m
+ .../apiConversao/services/UriService.java          |  40 [32m+++++++[m[31m-[m
+ .../guilherme/apiConversao/testeController.java    |  47 [32m+++++++++[m[31m-[m
+ src/main/resources/application.properties          |  10 [32m+[m[31m-[m
+ 13 files changed, 352 insertions(+), 42 deletions(-)
