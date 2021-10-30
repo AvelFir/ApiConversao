@@ -6,14 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-//@RestControllerAdvice
+@RestControllerAdvice
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handle(Exception e){
-        return new ResponseEntity<>(new ExceptionResponse(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
-    }
     @ExceptionHandler(UrlPadraoException.class)
     public ResponseEntity<ExceptionResponse> handle(UrlPadraoException e){
         return new ResponseEntity<>(new ExceptionResponse(e.getMessage()),HttpStatus.NOT_ACCEPTABLE);

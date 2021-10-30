@@ -4,10 +4,9 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import feign.Response;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface UploadResource {
+public interface UploadResourceClient {
     @RequestLine("POST")
     @Headers("Content-Type: multipart/form-data")
     Response uploadFile(@Param("file") MultipartFile file);

@@ -4,6 +4,8 @@ package br.com.guilherme.apiConversao.external;
 import feign.RequestInterceptor;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 
 public class FeignConfig {
 
+    private final Logger logger = LoggerFactory.getLogger("Feign Request Interceptor");
+
     @Bean
     public RequestInterceptor requestInterceptor(){
         return template -> {
@@ -24,17 +28,16 @@ public class FeignConfig {
                    Map.Entry::getKey,
                    entry -> {
                        if(entry.getValue().size() > 1){
-                           System.out.println("Entrou no if: " + entry.getValue().toString());
+                           logger.info("QueryParam possui , : {}",entry.getValue());
                            return List.of(String.join(",", entry.getValue()));
                        }
                        return entry.getValue();
                    }
            ));
-
            template.queries(null);
            template.queries(queries);
-            System.out.println(template.headers().toString());
-            System.out.println("URl saida: " + template.url().toString());
+           logger.info("Headers: {}", template.headers());
+           logger.info("URL Saida: {}", template.url());
         };
     }
 
